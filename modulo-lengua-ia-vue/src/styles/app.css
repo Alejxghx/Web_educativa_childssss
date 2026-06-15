@@ -1,0 +1,311 @@
+/* Estilos del modulo de Lengua con IA — DrawTale Edu. */
+
+:root {
+  color-scheme: light;
+  --morado: #7c3aed;
+  --morado-osc: #6d28d9;
+  --rosa: #ec4899;
+  --verde: #16a34a;
+  --rojo: #dc2626;
+  --tinta: #1e293b;
+  --gris: #64748b;
+  --borde: #e2e8f0;
+  --fondo: #faf5ff;
+  --tarjeta: #ffffff;
+  --sombra: 0 10px 30px rgba(124, 58, 237, 0.12);
+  --radio: 16px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color: var(--tinta);
+  background:
+    radial-gradient(1100px 500px at 100% -10%, #f5d0fe 0, transparent 60%),
+    radial-gradient(900px 400px at -10% 0, #ddd6fe 0, transparent 55%),
+    var(--fondo);
+  min-height: 100vh;
+}
+
+.app {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 3rem;
+}
+
+/* Cabecera ---------------------------------------------------------------- */
+.app__header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.app__kicker {
+  margin: 0;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  color: var(--morado);
+}
+
+.app__titulo {
+  margin: 0.25rem 0;
+  font-size: clamp(1.8rem, 5vw, 2.6rem);
+}
+
+.app__sub {
+  margin: 0;
+  color: var(--gris);
+}
+
+/* Pasos ------------------------------------------------------------------- */
+.pasos {
+  list-style: none;
+  display: flex;
+  gap: 0.5rem;
+  padding: 0;
+  margin: 0 0 1.5rem;
+}
+
+.pasos__item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--gris);
+}
+
+.pasos__num {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  font-weight: 800;
+  background: #ede9fe;
+  color: var(--morado);
+  border: 2px solid transparent;
+  transition: all 0.2s;
+}
+
+.pasos__item[data-state="active"] .pasos__num {
+  background: var(--morado);
+  color: #fff;
+  transform: scale(1.1);
+}
+
+.pasos__item[data-state="active"] .pasos__label {
+  color: var(--morado);
+  font-weight: 600;
+}
+
+.pasos__item[data-state="done"] .pasos__num {
+  background: var(--verde);
+  color: #fff;
+}
+
+/* Panel ------------------------------------------------------------------- */
+.panel {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+@media (max-width: 640px) {
+  .panel {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Subida ------------------------------------------------------------------ */
+.subida {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.subida__drop {
+  display: grid;
+  place-items: center;
+  min-height: 220px;
+  padding: 1rem;
+  border: 2px dashed #c4b5fd;
+  border-radius: var(--radio);
+  background: var(--tarjeta);
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.subida__drop:hover {
+  border-color: var(--morado);
+  background: #faf5ff;
+}
+
+.subida__drop--con-imagen {
+  border-style: solid;
+  padding: 0.5rem;
+}
+
+.subida__input {
+  display: none;
+}
+
+.subida__texto {
+  color: var(--gris);
+  font-weight: 600;
+}
+
+.subida__preview {
+  max-width: 100%;
+  max-height: 320px;
+  border-radius: 12px;
+  object-fit: contain;
+}
+
+/* Resultado --------------------------------------------------------------- */
+.resultado {
+  background: var(--tarjeta);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+  padding: 1.25rem;
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.resultado__vacio {
+  color: var(--gris);
+  text-align: center;
+}
+
+.resultado__error {
+  color: var(--rojo);
+  font-weight: 600;
+  text-align: center;
+}
+
+/* Loader ------------------------------------------------------------------ */
+.loader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  color: var(--morado);
+  font-weight: 600;
+}
+
+.loader__spinner {
+  width: 42px;
+  height: 42px;
+  border: 4px solid #ede9fe;
+  border-top-color: var(--morado);
+  border-radius: 999px;
+  animation: girar 0.8s linear infinite;
+}
+
+.loader__msg {
+  margin: 0;
+}
+
+@keyframes girar {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Cuento ------------------------------------------------------------------ */
+.cuento {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.cuento__texto {
+  margin: 0;
+  line-height: 1.6;
+  font-size: 1.05rem;
+}
+
+.cuento__pregunta {
+  margin: 0;
+  padding: 0.75rem 1rem;
+  background: #faf5ff;
+  border-left: 4px solid var(--morado);
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.cuento__label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--gris);
+}
+
+.cuento__answer {
+  width: 100%;
+  min-height: 90px;
+  resize: vertical;
+  font: inherit;
+  padding: 0.7rem;
+  border: 2px solid var(--borde);
+  border-radius: 12px;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.cuento__answer:focus {
+  border-color: var(--morado);
+}
+
+.cuento__saved {
+  margin: 0;
+  color: var(--verde);
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+/* Botones ----------------------------------------------------------------- */
+.btn {
+  font: inherit;
+  font-weight: 700;
+  border: none;
+  border-radius: 12px;
+  padding: 0.8rem 1.4rem;
+  cursor: pointer;
+  transition: transform 0.1s, background 0.15s, opacity 0.15s;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn:not(:disabled):active {
+  transform: translateY(1px);
+}
+
+.btn--primario {
+  background: var(--morado);
+  color: #fff;
+}
+
+.btn--primario:not(:disabled):hover {
+  background: var(--morado-osc);
+}
+
+/* Pie --------------------------------------------------------------------- */
+.app__footer {
+  text-align: center;
+  margin-top: 2rem;
+  color: var(--gris);
+  font-size: 0.85rem;
+}

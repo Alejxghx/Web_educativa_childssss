@@ -1,0 +1,25 @@
+# Dependencias
+node_modules
+
+# Builds
+dist
+dist-ssr
+
+# Caché del compilador de TypeScript
+*.tsbuildinfo
+
+# Variables de entorno (NUNCA subir la API key)
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+npm-debug.log*
+
+# Editor / SO
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.local
