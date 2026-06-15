@@ -1,0 +1,72 @@
+.vocab {
+  background: var(--tarjeta);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.vocab__titulo {
+  margin: 0 0 1rem;
+  font-size: 1.3rem;
+  text-align: center;
+}
+
+.vocab__temas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.vocab__chip {
+  font: inherit;
+  font-weight: 700;
+  padding: 0.5rem 0.9rem;
+  border: 2px solid var(--borde);
+  border-radius: 999px;
+  background: #fff;
+  cursor: pointer;
+  transition: transform 0.1s, border-color 0.15s, background 0.15s;
+}
+
+.vocab__chip:hover {
+  border-color: var(--naranja);
+}
+
+.vocab__chip.activo {
+  background: var(--naranja);
+  border-color: var(--naranja);
+  color: #fff;
+}
+
+.vocab__palabra {
+  margin-top: 1.5rem;
+  min-height: 2.5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: clamp(1.4rem, 5vw, 2.2rem);
+  text-align: center;
+  transition: transform 0.2s ease;
+}
+
+.vocab__palabra--pop {
+  transform: scale(1.15);
+}
+
+.vocab__en {
+  color: var(--teal-osc);
+}
+
+.vocab__trad {
+  color: var(--gris);
+  font-weight: 600;
+}
+
+.vocab__hint {
+  font-size: 1rem;
+  color: var(--gris);
+}

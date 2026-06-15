@@ -1,0 +1,26 @@
+<section class="vocab">
+  <h2 class="vocab__titulo">Vocabulary by topic 🔊</h2>
+
+  <div class="vocab__temas">
+    @for (t of temas; track t.tema) {
+      <button
+        type="button"
+        class="vocab__chip"
+        [class.activo]="seleccionado()?.tema === t.tema"
+        (click)="elegir(t)"
+      >
+        {{ t.emoji }} {{ t.tema }}
+      </button>
+    }
+  </div>
+
+  <div class="vocab__palabra" [class.vocab__palabra--pop]="animando()">
+    @if (seleccionado(); as s) {
+      <span class="vocab__emoji">{{ s.emoji }}</span>
+      <strong class="vocab__en">{{ s.palabra }}</strong>
+      <span class="vocab__trad">— {{ s.traduccion }}</span>
+    } @else {
+      <span class="vocab__hint">Toca un tema para escuchar la palabra.</span>
+    }
+  </div>
+</section>

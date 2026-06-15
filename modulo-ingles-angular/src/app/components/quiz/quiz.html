@@ -1,0 +1,43 @@
+<section class="quiz">
+  <h2 class="quiz__titulo">Quiz time! 🎯</h2>
+
+  @if (!terminado()) {
+    @if (preguntaActual(); as p) {
+      <p class="quiz__pregunta">{{ p.pregunta }}</p>
+
+      <div class="quiz__opciones">
+        @for (op of p.opciones; track op) {
+          <button type="button" class="quiz__op" (click)="responder(op)">
+            {{ op }}
+          </button>
+        }
+      </div>
+
+      @if (feedback(); as f) {
+        @for (k of [intentos()]; track k) {
+          <p
+            class="quiz__feedback"
+            [class.ok]="f.tipo === 'ok'"
+            [class.error]="f.tipo === 'error'"
+          >
+            {{ f.mensaje }}
+          </p>
+        }
+      }
+
+      <p class="quiz__progreso">
+        Pregunta {{ indice() + 1 }} de {{ preguntas.length }} · Aciertos:
+        {{ aciertos() }}
+      </p>
+    }
+  } @else {
+    <div class="quiz__fin">
+      <p class="quiz__resultado">
+        🏆 {{ aciertos() }} / {{ preguntas.length }} correctas
+      </p>
+      <button type="button" class="btn btn--primario" (click)="reiniciar()">
+        Play again
+      </button>
+    </div>
+  }
+</section>
