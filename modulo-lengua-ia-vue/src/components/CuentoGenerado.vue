@@ -6,15 +6,9 @@ defineProps<{
   cuento: CuentoIA | null;
   error: string;
   mensajeLoader: string;
-  respuesta: string;
-  guardado: boolean;
 }>();
 
-const emit = defineEmits<{ responder: [texto: string] }>();
-
-function alEscribir(evento: Event): void {
-  emit("responder", (evento.target as HTMLTextAreaElement).value);
-}
+const emit = defineEmits<{ guardar: [] }>();
 </script>
 
 <template>
@@ -37,15 +31,9 @@ function alEscribir(evento: Event): void {
       <p class="cuento__texto">{{ cuento.cuento }}</p>
       <p class="cuento__pregunta">🤔 {{ cuento.pregunta }}</p>
 
-      <label class="cuento__label" for="respuesta">Tu respuesta:</label>
-      <textarea
-        id="respuesta"
-        class="cuento__answer"
-        :value="respuesta"
-        placeholder="Escribe aquí lo que piensas…"
-        @input="alEscribir"
-      ></textarea>
-      <p v-if="guardado" class="cuento__saved">Guardado ✓</p>
+      <button type="button" class="btn btn--primario" @click="emit('guardar')">
+        Continuar → Responder la pregunta
+      </button>
     </div>
   </section>
 </template>

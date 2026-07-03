@@ -23,3 +23,17 @@ export interface DibujoCargado {
   /** Tipo MIME del archivo (image/png, image/jpeg, ...). */
   mediaType: string;
 }
+
+/**
+ * Entidad principal del modulo: un cuento generado a partir de un dibujo.
+ * Vive en el store global (historial) y se referencia por id en la ruta
+ * de detalle ('/cuento/:id').
+ */
+export interface Cuento {
+  id: string;
+  dibujoDataUrl: string;
+  texto: string;
+  pregunta: string;
+  respuesta: string;
+  fecha: string; // ISO string
+}

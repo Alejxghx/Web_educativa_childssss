@@ -1,22 +1,6 @@
 <script setup lang="ts">
-import PasosProgreso from "./components/PasosProgreso.vue";
-import SubidaDibujo from "./components/SubidaDibujo.vue";
-import CuentoGenerado from "./components/CuentoGenerado.vue";
-import { useLenguaIA } from "./composables/useLenguaIA";
-
-const {
-  estado,
-  dibujo,
-  cuento,
-  error,
-  mensajeLoader,
-  respuesta,
-  guardado,
-  paso,
-  cargarDibujo,
-  generar,
-  guardarRespuesta,
-} = useLenguaIA();
+// App.vue ahora es el shell del modulo: navbar compartida + RouterView.
+// El contenido de cada pantalla vive en src/views/.
 </script>
 
 <template>
@@ -29,25 +13,12 @@ const {
       </p>
     </header>
 
-    <PasosProgreso :paso="paso" />
+    <nav class="navbar">
+      <RouterLink to="/" class="navbar__link">✨ Generar cuento</RouterLink>
+      <RouterLink to="/historial" class="navbar__link">📚 Mi historial</RouterLink>
+    </nav>
 
-    <div class="panel">
-      <SubidaDibujo
-        :dibujo="dibujo"
-        :ocupado="estado === 'generando'"
-        @cargar="cargarDibujo"
-        @generar="generar"
-      />
-      <CuentoGenerado
-        :estado="estado"
-        :cuento="cuento"
-        :error="error"
-        :mensaje-loader="mensajeLoader"
-        :respuesta="respuesta"
-        :guardado="guardado"
-        @responder="guardarRespuesta"
-      />
-    </div>
+    <RouterView />
 
     <footer class="app__footer">
       Módulo de Lengua con IA · Hito 3 · Vue 3 + Vite + TypeScript

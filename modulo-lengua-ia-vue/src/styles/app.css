@@ -309,3 +309,97 @@ body {
   color: var(--gris);
   font-size: 0.85rem;
 }
+
+/* Navbar -------------------------------------------------------------- */
+.navbar {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.navbar__link {
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--morado-osc);
+  background: var(--tarjeta);
+  border: 1px solid var(--borde);
+  border-radius: 999px;
+  padding: 0.55rem 1.1rem;
+  box-shadow: var(--sombra);
+  transition: background 0.15s, color 0.15s;
+}
+
+.navbar__link:hover {
+  background: var(--morado);
+  color: #fff;
+}
+
+.navbar__link.router-link-exact-active {
+  background: var(--morado);
+  color: #fff;
+}
+
+/* Historial ------------------------------------------------------------- */
+.historial__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.historial__buscador {
+  font: inherit;
+  padding: 0.6rem 0.9rem;
+  border-radius: 10px;
+  border: 1px solid var(--borde);
+  min-width: 220px;
+}
+
+.historial__lista {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.historial__link {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+  background: var(--tarjeta);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  padding: 0.75rem;
+  box-shadow: var(--sombra);
+  transition: transform 0.1s;
+}
+
+.historial__link:hover {
+  transform: translateY(-2px);
+}
+
+.historial__miniatura {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+.historial__texto {
+  margin: 0 0 0.25rem;
+  font-weight: 600;
+}
+
+.historial__meta {
+  margin: 0;
+  color: var(--gris);
+  font-size: 0.85rem;
+}

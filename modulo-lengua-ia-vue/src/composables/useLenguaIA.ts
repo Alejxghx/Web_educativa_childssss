@@ -2,22 +2,19 @@ import { computed, onUnmounted, ref } from "vue";
 import { generarCuento } from "../lib/groq";
 import type { CuentoIA, DibujoCargado, EstadoLengua } from "../types";
 
-const CLAVE_RESPUESTA = "drawtale-respuesta-lectura";
 const MENSAJES_LOADER = [
   "Analizando el dibujo…",
   "Creando personajes…",
   "Escribiendo el cuento…",
 ];
 
-/** Encapsula el flujo completo: subir dibujo, generar cuento y responder. */
+/** Encapsula el flujo de generacion: subir dibujo -> pedir cuento a la IA. */
 export function useLenguaIA() {
   const estado = ref<EstadoLengua>("inicial");
   const dibujo = ref<DibujoCargado | null>(null);
   const cuento = ref<CuentoIA | null>(null);
   const error = ref("");
   const mensajeLoader = ref(MENSAJES_LOADER[0]);
-  const respuesta = ref(localStorage.getItem(CLAVE_RESPUESTA) ?? "");
-  const guardado = ref(respuesta.value.trim().length > 0);
 
   // Paso visible (1, 2 o 3) derivado del estado.
   const paso = computed(() => {
@@ -83,13 +80,6 @@ export function useLenguaIA() {
     }
   }
 
-  /** Persiste la respuesta del niño en localStorage en cada cambio. */
-  function guardarRespuesta(texto: string): void {
-    respuesta.value = texto;
-    localStorage.setItem(CLAVE_RESPUESTA, texto);
-    guardado.value = texto.trim().length > 0;
-  }
-
   onUnmounted(detenerLoader);
 
   return {
@@ -98,11 +88,8 @@ export function useLenguaIA() {
     cuento,
     error,
     mensajeLoader,
-    respuesta,
-    guardado,
     paso,
     cargarDibujo,
     generar,
-    guardarRespuesta,
   };
 }
