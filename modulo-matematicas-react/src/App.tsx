@@ -8,26 +8,32 @@ import RetoView from "./views/RetoView";
 /** Composicion navegable del modulo de Matematicas. */
 export default function App() {
   return (
-    <main className="app">
-      <header className="app__header">
-        <p className="app__kicker">DrawTale Edu</p>
-        <h1 className="app__titulo">Modulo de Matematicas</h1>
-        <p className="app__sub">
-          Actividades, detalle, reto y progreso con datos simulados.
-        </p>
+    <div className="app-shell">
+      <header className="topbar">
+        <div className="brand" aria-label="DrawTale">
+          <span className="brand__mark">✓</span>
+          <span>DrawTale</span>
+        </div>
         <Navbar />
+        <div className="topbar__tools" aria-label="Herramientas">
+          <span>◎</span>
+          <span>⚙</span>
+        </div>
       </header>
 
-      <Routes>
-        <Route path="/" element={<InicioView />} />
-        <Route path="/reto" element={<RetoView />} />
-        <Route path="/progreso" element={<ProgresoView />} />
-        <Route path="/actividades/:id" element={<DetalleActividadView />} />
-      </Routes>
+      <main className="app">
+        <Routes>
+          <Route path="/" element={<InicioView />} />
+          <Route path="/reto" element={<RetoView />} />
+          <Route path="/progreso" element={<ProgresoView />} />
+          <Route path="/actividades/:id" element={<DetalleActividadView />} />
+        </Routes>
+      </main>
 
       <footer className="app__footer">
-        Modulo de Matematicas - Hito 3 - React + Vite + TypeScript
+        <strong>DrawTale</strong>
+        <span>Modulo de Matematicas - React + Vite + TypeScript</span>
       </footer>
-    </main>
+    </div>
   );
 }

@@ -1,6 +1,6 @@
 import { useRetoMatematicas } from "../hooks/useRetoMatematicas";
-import Temporizador from "./Temporizador";
 import Marcador from "./Marcador";
+import Temporizador from "./Temporizador";
 
 /** Componente principal del juego: orquesta el hook con los subcomponentes. */
 export default function RetoMatematicas() {
@@ -15,17 +15,20 @@ export default function RetoMatematicas() {
       : " error";
 
   return (
-    <section className="reto" aria-label="Reto de matemáticas">
+    <section className="reto" aria-label="Reto de matematicas">
       <div className="reto__barra">
         <Temporizador segundosRestantes={reto.segundosRestantes} />
         <Marcador puntaje={reto.puntaje} mejorPuntaje={reto.mejorPuntaje} />
       </div>
 
-      <p className="reto__pregunta" aria-live="polite">
-        {reto.estado === "inactivo" && "Pulsa «Comenzar» para empezar el reto."}
-        {jugando && reto.pregunta?.texto}
-        {reto.estado === "terminado" && "¡Tiempo!"}
-      </p>
+      <div className="reto__centro">
+        <p className="reto__kicker">Desafio de calculo rapido</p>
+        <p className="reto__pregunta" aria-live="polite">
+          {reto.estado === "inactivo" && "245 + 130 = ?"}
+          {jugando && reto.pregunta?.texto}
+          {reto.estado === "terminado" && "Tiempo terminado"}
+        </p>
+      </div>
 
       <form
         className="reto__form"
@@ -39,7 +42,7 @@ export default function RetoMatematicas() {
           type="text"
           inputMode="numeric"
           autoComplete="off"
-          placeholder="Tu respuesta"
+          placeholder="Tu respuesta..."
           value={reto.respuesta}
           onChange={(evento) => reto.cambiarRespuesta(evento.target.value)}
           disabled={!jugando}
@@ -50,7 +53,7 @@ export default function RetoMatematicas() {
           className="btn btn--primario"
           disabled={!reto.esRespuestaValida}
         >
-          Comprobar
+          Comprobar ›
         </button>
       </form>
 
@@ -64,7 +67,7 @@ export default function RetoMatematicas() {
         onClick={reto.comenzar}
         disabled={jugando}
       >
-        {reto.estado === "inactivo" ? "Comenzar" : "Jugar otra vez"}
+        {reto.estado === "inactivo" ? "Comenzar desafio" : "Jugar otra vez"}
       </button>
     </section>
   );

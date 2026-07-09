@@ -4,10 +4,10 @@ export default function Navbar() {
   return (
     <nav className="nav" aria-label="Navegacion principal">
       <NavLink to="/" end>
-        Actividades
+        Practica
       </NavLink>
-      <NavLink to="/reto">Reto</NavLink>
-      <NavLink to="/progreso">Progreso</NavLink>
+      <NavLink to="/reto">Desafio</NavLink>
+      <NavLink to="/progreso">Logros</NavLink>
     </nav>
   );
 }

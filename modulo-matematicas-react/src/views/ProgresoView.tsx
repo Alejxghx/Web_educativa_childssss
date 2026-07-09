@@ -8,10 +8,13 @@ export default function ProgresoView() {
   return (
     <section className="panel">
       <h2>Progreso global</h2>
+      <p>Estos datos se actualizan desde el mismo estado global usado en Practica.</p>
       <div className="resumen">
         <div>
           <span className="resumen__valor">{practicadas}</span>
-          <span className="resumen__label">practicadas</span>
+          <span className="resumen__label">
+            completadas de {actividades.length}
+          </span>
         </div>
         <div>
           <span className="resumen__valor">{totalPuntos}</span>
