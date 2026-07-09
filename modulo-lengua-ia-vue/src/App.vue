@@ -1,6 +1,10 @@
 <script setup lang="ts">
-// App.vue ahora es el shell del modulo: navbar compartida + RouterView.
-// El contenido de cada pantalla vive en src/views/.
+import { onMounted } from "vue";
+import { useHistorialStore } from "./stores/historial";
+
+const historial = useHistorialStore();
+
+onMounted(() => { historial.iniciar() })
 </script>
 
 <template>

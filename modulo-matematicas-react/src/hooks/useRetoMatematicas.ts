@@ -1,10 +1,9 @@
 import { useCallback, useEffect, useState } from "react";
 import { generarPregunta } from "../lib/preguntas";
-import { useLocalStorage } from "./useLocalStorage";
+import { supabase } from "../lib/supabase";
 import type { EstadoJuego, Pregunta, RecordMatematicas } from "../types";
 
 const DURACION_SEGUNDOS = 90;
-const CLAVE_RECORD = "drawtale-record-matematicas";
 const SOLO_ENTEROS = /^\d+$/;
 
 interface Feedback {
@@ -34,10 +33,29 @@ export function useRetoMatematicas(): RetoMatematicas {
   const [segundosRestantes, setSegundos] = useState(DURACION_SEGUNDOS);
   const [respuesta, setRespuesta] = useState("");
   const [feedback, setFeedback] = useState<Feedback>({ mensaje: "", tipo: "info" });
-  const [record, setRecord] = useLocalStorage<RecordMatematicas>(CLAVE_RECORD, {
+  const [record, setRecord] = useState<RecordMatematicas>({
     mejorPuntaje: 0,
     fecha: "",
   });
+  const [usuarioId, setUsuarioId] = useState<string | null>(null);
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data }) => {
+      const user = data.session?.user;
+      if (!user) { window.location.href = '/'; return }
+      setUsuarioId(user.id)
+      supabase.from('records_matematicas')
+        .select('mejor_puntaje, fecha')
+        .eq('usuario_id', user.id)
+        .order('mejor_puntaje', { ascending: false })
+        .limit(1)
+        .then(({ data }) => {
+          if (data && data.length > 0) {
+            setRecord({ mejorPuntaje: data[0].mejor_puntaje, fecha: data[0].fecha })
+          }
+        })
+    })
+  }, [])
 
   const esRespuestaValida =
     estado === "jugando" && SOLO_ENTEROS.test(respuesta.trim());
@@ -61,12 +79,19 @@ export function useRetoMatematicas(): RetoMatematicas {
     setRespuesta("");
 
     if (puntaje > record.mejorPuntaje) {
-      setRecord({ mejorPuntaje: puntaje, fecha: new Date().toISOString() });
+      const nuevoRecord = { mejorPuntaje: puntaje, fecha: new Date().toISOString() }
+      setRecord(nuevoRecord)
+      if (usuarioId) {
+        supabase.from('records_matematicas').insert({
+          usuario_id: usuarioId,
+          mejor_puntaje: puntaje,
+        }).then()
+      }
       setFeedback({ mensaje: `🏆 ¡Nuevo récord: ${puntaje} aciertos!`, tipo: "ok" });
     } else {
       setFeedback({ mensaje: `Terminaste con ${puntaje} aciertos.`, tipo: "info" });
     }
-  }, [estado, segundosRestantes, puntaje, record.mejorPuntaje, setRecord]);
+  }, [estado, segundosRestantes, puntaje, record.mejorPuntaje, usuarioId]);
 
   const comenzar = useCallback(() => {
     setPuntaje(0);
