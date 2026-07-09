@@ -5,5 +5,5 @@ import vue from "@vitejs/plugin-vue";
 // dentro de la contenedora JS pura del Hito 4.
 export default defineConfig({
   plugins: [vue()],
-  base: "./",
+  base: "/vue/",
 });

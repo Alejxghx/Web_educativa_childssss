@@ -1,10 +1,10 @@
-import { createRouter, createWebHistory } from "vue-router";
+import { createRouter, createWebHashHistory } from "vue-router";
 import GenerarView from "../views/GenerarView.vue";
 import HistorialView from "../views/HistorialView.vue";
 import DetalleCuentoView from "../views/DetalleCuentoView.vue";
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHashHistory('/vue/'),
   routes: [
     {
       path: "/",

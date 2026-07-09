@@ -6,5 +6,5 @@ import react from "@vitejs/plugin-react";
 // como widget dentro de la contenedora JS pura del Hito 4.
 export default defineConfig({
   plugins: [react()],
-  base: "./",
+  base: "/react/",
 });

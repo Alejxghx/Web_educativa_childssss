@@ -1,6 +1,6 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 import App from "./App";
 import { MatematicasProvider } from "./context/MatematicasContext";
 import "./styles/app.css";
@@ -12,10 +12,10 @@ if (!contenedor) {
 
 createRoot(contenedor).render(
   <StrictMode>
-    <BrowserRouter>
+    <HashRouter>
       <MatematicasProvider>
         <App />
       </MatematicasProvider>
-    </BrowserRouter>
+    </HashRouter>
   </StrictMode>,
 );
